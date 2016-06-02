@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+</head>
+<body>
+    Latitude:
+    <input type="text" id="txtLatitude" value="18.92488028662047" />
+    Latitude:
+    <input type="text" id="txtLongitude" value="72.8232192993164" />
+    <input type="button" value="Get Address" onclick="fn_GetAddressLanLat()" />
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        function fn_GetAddressLanLat() {
+            alert('1');
+            alert(navigator);
+            alert(navigator.geolocation);
+            if (navigator.geolocation) {
+                alert('2');
+                navigator.geolocation.getCurrentPosition(success, error, geo_options);
+                alert('2');
+            } else {
+                alert("Geolocation services are not supported by your web browser.");
+            }
+
+            function success(position) {
+                alert('abc');
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var altitude = position.coords.altitude;
+                var accuracy = position.coords.accuracy;
+
+                document.getElementById("txtLatitude").value = position.coords.latitude;
+                document.getElementById("txtLongitude").value = position.coords.longitude;
+                GetAddress()
+            }
+
+            function error(error) {
+                alert("Unable to retrieve your location due to " + error.code + " : " + error.message);
+            };
+
+            var geo_options = {
+                enableHighAccuracy: true,
+                maximumAge: 30000,
+                timeout: 27000
+            };
+        }
+        function GetAddress() {
+            var lat = parseFloat(document.getElementById("txtLatitude").value);
+            var lng = parseFloat(document.getElementById("txtLongitude").value);
+            var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        alert("Location: " + results[1].formatted_address);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

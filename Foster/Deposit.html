@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>FOSTER - Cheque Deposit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- font-awesome icons -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Comfortaa:400,700,300' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!-- Metis Menu -->
+<script src="js/metisMenu.min.js"></script>
+<script src="js/custom.js"></script>
+<link href="css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
+</head> 
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		<div class="sidebar" role="navigation">
+            <div class="navbar-collapse">
+				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right dev-page-sidebar mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" id="cbp-spmenu-s1">
+					<div class="scrollbar scrollbar1">
+						<ul class="nav" id="side-menu">
+							<li>
+								<a href="main.html"><i class="fa fa-home nav_icon"></i>Home</a>
+							</li>
+							<li>
+								<a href="cheque-pickup.html"><i class="fa fa-magnet nav_icon"></i>Pickup Schedule</a></li>
+							<li>
+								<a href="PickupCompleted.html"><i class="fa fa-check-square nav_icon"></i>Pickup Completed</a></li>
+							<li>
+								<a href="Deposit.html"><i class="fa fa-bullhorn nav_icon"></i>Deposit Pending</a>
+							</li>
+							<li>
+								<a href="ReturnedCheques.html"><i class="fa fa-reply nav_icon"></i>Returned Cheques</a>
+							</li>
+							<li>
+								<a href="DueDispatch.html"><i class="fa fa-truck nav_icon"></i>Due for Dispatch</a>
+							</li>
+						</ul>
+					</div>
+					<!-- //sidebar-collapse -->
+				</nav>
+			</div>
+		</div>
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+		<div class="sticky-header header-section ">
+			<div class="header-left">
+				<!--logo -->
+				<div class="logo">
+					<a href="index.html"><img src="images/logo.png" /></a>
+				</div>
+				<!--//logo-->
+				<div class="user-right">
+				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+				</div>
+				
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!-- //header-ends -->
+		<div id="page-wrapper">
+			<div class="main-page">
+				<div class="form-grid1">
+								<h4>Deposit Details</h4>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Customer Name</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="text" placeholder="Customer Name">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Policy No.</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="number" placeholder="PolicyNumber">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Cheque Pickup Date</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="date" placeholder="Cheque Pickup Date">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Cheque Number</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="number" placeholder="Cheque Number" min="6" max="12">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Cheque Amount</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="number" placeholder="Cheuqe Amount" min="3" max="12">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Cheque Bank Name</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="text" placeholder="Cheque Bank Name">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Karvy Receipt</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="number" placeholder="Karvy Receipt" min="6" max="12">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Deposit Date</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="date" placeholder="Deposit Date">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Acknowledgement Number</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="number" placeholder="Acknowledgement Number" min="6" max="12">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Deposit Bank Branch Name</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="text" placeholder="Deposit Bank Branch Name">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Deposit Branch Address</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<textarea placeholder="Address"></textarea>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+										<div class="bottom-form">
+								<div class="col-md-3 grid-form">
+									<h5>Deposition Status</h5>
+								</div>
+								<div class="col-md-9 grid-form1">
+								<select class="ser">
+									<option value="0">Please select</option>
+									<option value="1">Accepted</option>
+									<option value="2">Rejected</option>
+								</select>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Reason</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="text" placeholder="Reason">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Receipt Number (Karvy)</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="number" placeholder="Receipt Number(Karvy)" min="6" max="12">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+								<div class="col-md-3 grid-form">
+									<h5>Customer Interaction Status</h5>
+								</div>
+								<div class="col-md-9 grid-form1">
+								<select class="ser">
+									<option value="0">Please select</option>
+									<option value="1">Completed</option>
+									<option value="2">Appointment Re-Scheduled</option>
+									<option value="3">Not Met</option>
+								</select>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="bottom-form">
+								<div class="col-md-3 grid-form">
+									<h5>FOS Visit Remarks</h5>
+								</div>
+								<div class="col-md-9 grid-form1">
+								<select class="ser">
+									<option value="0">Select</option>
+									<option value="1">Cheque Pickup</option>
+									<option value="2">Door Lock</option>
+									<option value="3">No Change in Details</option>
+									<option value="4">Short Address</option>
+									<option value="5">New Address Available-No Service Location</option>
+								</select>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Detailed Comments</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input type="text" placeholder="Comments">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-9 grid-form1">
+									<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+								<button type="reset" class="btn btn-sm btn-warning">Close</button>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+			</div>		
+		</div>	
+	</div>	
+	<!--typo-ends-->
+	
+			<div class="copy-section">
+		<p>&copy; 2016 FOSTER</p>
+		</div>
+	</div>
+			<!-- Classie -->
+				<script src="js/classie.js"></script>
+				<script>
+					var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+						showLeftPush = document.getElementById( 'showLeftPush' ),
+						body = document.body;
+						
+					showLeftPush.onclick = function() {
+						classie.toggle( this, 'active' );
+						classie.toggle( body, 'cbp-spmenu-push-toright' );
+						classie.toggle( menuLeft, 'cbp-spmenu-open' );
+						disableOther( 'showLeftPush' );
+					};
+					
+
+					function disableOther( button ) {
+						if( button !== 'showLeftPush' ) {
+							classie.toggle( showLeftPush, 'disabled' );
+						}
+					}
+				</script>
+			<!-- Bootstrap Core JavaScript --> 
+				
+				<script type="text/javascript" src="js/bootstrap.min.js"></script>
+				<!--scrolling js-->
+				<script src="js/jquery.nicescroll.js"></script>
+				<script src="js/scripts.js"></script>
+				<!--//scrolling js-->
+</body>
+</html>

@@ -1,0 +1,246 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>FOSTER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- js-->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+    <!--webfonts-->
+    <link href='//fonts.googleapis.com/css?family=Comfortaa:400,700,300' rel='stylesheet'
+        type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet'
+        type='text/css'>
+    <!--//webfonts-->
+    <!-- Metis Menu -->
+    <script src="js/metisMenu.min.js"></script>
+    <script src="js/custom.js"></script>
+    <link href="css/custom.css" rel="stylesheet">
+    <!--//Metis Menu -->
+</head>
+<body class="cbp-spmenu-push">
+    <div class="main-content">
+        <!--left-fixed -navigation-->
+        <div class="sidebar" role="navigation">
+            <div class="navbar-collapse">
+                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right dev-page-sidebar mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar"
+                    id="cbp-spmenu-s1">
+					<div class="scrollbar scrollbar1">
+						<ul class="nav" id="side-menu">
+							<li>
+								<a href="main.html"><i class="fa fa-home nav_icon"></i>Home</a>
+							</li>
+							<li>
+								<a href="cheque-pickup.html"><i class="fa fa-magnet nav_icon"></i>Pickup Schedule</a></li>
+							<li>
+								<a href="PickupCompleted.html"><i class="fa fa-check-square nav_icon"></i>Pickup Completed</a></li>
+							<li>
+								<a href="Deposit.html"><i class="fa fa-bullhorn nav_icon"></i>Deposit Pending</a>
+							</li>
+							<li>
+								<a href="ReturnedCheques.html"><i class="fa fa-reply nav_icon"></i>Returned Cheques</a>
+							</li>
+							<li>
+								<a href="DueDispatch.html"><i class="fa fa-truck nav_icon"></i>Due for Dispatch</a>
+							</li>
+						</ul>
+					</div>
+					<!-- //sidebar-collapse -->
+				</nav>
+            </div>
+        </div>
+        <!--left-fixed -navigation-->
+        <!-- header-starts -->
+        <div class="sticky-header header-section ">
+            <div class="header-left">
+                <!--logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" /></a>
+                </div>
+                <!--//logo-->
+                <div class="user-right">
+                    <button id="showLeftPush">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+        <!-- //header-ends -->
+        <div id="page-wrapper">
+            <div class="main-page">
+                <div class="appearance">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Customer Name
+                                    </th>
+                                    <th>
+                                        Appointment Time
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-danger"><a href="#">TODAY</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge"><a href="#">NORMAL</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-primary"><a href="#">1</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success"><a href="#">COMPLETED</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-info"><a href="#">DEPOSITPENDING</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-danger"><a href="#">TODAY</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-warning"><a href="#">MISSED</a></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divRes">
+    </div>
+    <!--typo-ends-->
+    <div class="copy-section">
+        <p>
+            &copy; 2016 FOSTER</p>
+    </div>
+    <!-- Classie -->
+    <script src="js/classie.js"></script>
+    <script>
+        var menuLeft = document.getElementById('cbp-spmenu-s1'),
+						showLeftPush = document.getElementById('showLeftPush'),
+						body = document.body;
+
+        showLeftPush.onclick = function () {
+            classie.toggle(this, 'active');
+            classie.toggle(body, 'cbp-spmenu-push-toright');
+            classie.toggle(menuLeft, 'cbp-spmenu-open');
+            disableOther('showLeftPush');
+        };
+
+
+        function disableOther(button) {
+            if (button !== 'showLeftPush') {
+                classie.toggle(showLeftPush, 'disabled');
+            }
+        }
+
+        var sFosCode = localStorage.getItem("FOSCode");
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function () {
+        }
+        xmlhttp.onerror = function () {
+            $('#laoderimg').hide();
+            alert("Check Your Network Connection");
+        }
+
+        xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+        xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/getFOSAssignments");
+        xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
+        xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+
+        var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                '<soapenv:Header/>' +
+                                '<soapenv:Body>' +
+                                '<tem:getFOSAssignments>' +
+                                '<tem:foscode>222222</tem:foscode>' +
+                                '</tem:getFOSAssignments>' +
+                                '</soapenv:Body>' +
+                                '</soapenv:Envelope>';
+        xmlhttp.send(xml);
+
+        xmlhttp.onreadystatechange = function () {
+            var response = xmlhttp.responseText;
+            //document.getElementById('divRes').innerText = response;
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var result = $(response).find("getFOSAssignmentsResult").text();
+                alert(result);
+                if (result == "NoData") {
+                    //                        document.getElementById('divModalContent').innerHTML = '<ul class="simple-list red-bullet"><li>No Policies Found</li></ul>';
+                    //                        window.location.href = '#modal'
+                }
+                else {
+                    var objPF = JSON.parse(result);
+                    a = JSON.stringify(objPF);
+                    var PFData = objPF[0];
+                    alert(objPF[0]["owner_name"]);
+                    alert(objPF[1]["owner_name"]);
+                }
+            }
+        };
+
+        $(function () {
+            Page.init();
+        });
+    </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!--scrolling js-->
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!--//scrolling js-->
+</body>
+</html>

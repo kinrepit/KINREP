@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Device Properties Example</title>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        // Wait for Cordova to load
+        //
+        //document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+
+        // onSuccess Geolocation
+        //
+        function onSuccess(position) {
+            //alert('a');
+            var element = document.getElementById('geolocation');
+            element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                            'Longitude: ' + position.coords.longitude + '<br />' +
+                            'Altitude: ' + position.coords.altitude + '<br />' +
+                            'Accuracy: ' + position.coords.accuracy + '<br />' +
+                            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
+                            'Heading: ' + position.coords.heading + '<br />' +
+                            'Speed: ' + position.coords.speed + '<br />' +
+                            'Timestamp: ' + position.timestamp + '<br />';
+
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            //alert(lat);
+            //alert(lng);
+            var latlng = new google.maps.LatLng(lat, lng);
+            //alert('1');
+            var geocoder = geocoder = new google.maps.Geocoder();
+            //alert('2');
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                //alert('aaa');
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        //alert("Location: " + results[1].formatted_address);
+
+                        document.getElementById('address').innerHTML = results[1].formatted_address;
+                    }
+                }
+            });
+        }
+
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n');
+        }
+
+    </script>
+</head>
+<body>
+    <input type="button" value='Get Address' onclick='onDeviceReady()' />
+    <p id="geolocation">
+        Finding geolocation...</p>
+    <br />
+    Address
+    <p id="address">
+        Finding geolocation...</p>
+</body>
+</html>

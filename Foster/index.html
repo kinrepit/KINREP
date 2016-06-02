@@ -1,0 +1,106 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>FOSTER - Cheque Pickup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- js-->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+    <!--webfonts-->
+    <link href='//fonts.googleapis.com/css?family=Comfortaa:400,700,300' rel='stylesheet'
+        type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet'
+        type='text/css'>
+    <!--//webfonts-->
+    <!-- Metis Menu -->
+    <script src="js/metisMenu.min.js"></script>
+    <script src="js/custom.js"></script>
+    <link href="css/custom.css" rel="stylesheet">
+    <!--//Metis Menu -->
+</head>
+<body class="cbp-spmenu-push">
+    <div class="main-content">
+        <!--left-fixed -navigation-->
+        <!--left-fixed -navigation-->
+        <!-- header-starts -->
+        <div class="sticky-header header-section ">
+            <div class="header-left">
+                <!--logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" /></a>
+                </div>
+                <!--//logo-->
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+        <!-- //header-ends -->
+        <div id="page-wrapper">
+            <div class="main-page">
+                <div class="form-grid1">
+                    <h4>
+                        Login</h4>
+                    <div class="bottom-form">
+                        <div class="col-md-3 grid-form">
+                            <h5>
+                                FOS Code</h5>
+                        </div>
+                        <div class="col-md-9 grid-form1">
+                            <input type="text" id="txtFosCode" placeholder="FOS Code" maxlength="10">
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <div class="bottom-form">
+                        <div class="col-md-9 grid-form1">
+                            <input type="button" class="btn btn-lg btn-primary" value="Login" onclick='fn_Login();' />
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="bottom-form">
+                        <div class="col-md-12 grid-form">
+                            <h5 id="hError" style='color: Red;'>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Classie -->
+    <script src="js/classie.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!--scrolling js-->
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!--//scrolling js-->
+    <script language="javascript" type="text/javascript">
+        function fn_Login() {
+            if (document.getElementById('txtFosCode').value == '') {
+                document.getElementById('hError').innerText = 'Please enter your FOS Code';
+                return;
+            }
+//            if (document.getElementById('txtMobNo').value.length != 10 || isNaN(document.getElementById('txtMobNo').value)) {
+//                document.getElementById('hError').innerText = 'Mobile No. should be 10 digit number';
+//                return;
+//            }
+            document.getElementById('hError').innerText = '';
+            localStorage.setItem("FOSCode", document.getElementById('txtFosCode').value);
+            window.location.href = 'main.html';
+        }
+    </script>
+</body>
+</html>
