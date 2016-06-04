@@ -22,9 +22,45 @@
         type='text/css'>
     <!--//webfonts-->
     <!-- Metis Menu -->
-    <script src="js/metisMenu.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script language="javascript" type="text/javascript" src="js/metisMenu.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        var watchID = null;
+
+        function onDeviceReady() {
+            var options = { timeout: 300000 }; // Track Geo Location for every 5 Min.
+            watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+        }
+
+        function onSuccess(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        var element = document.getElementById('geolocation');
+                        element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                            'Longitude: ' + position.coords.longitude + '<br />' +
+                            'Address : ' + results[1].formatted_address + '<br/>' +
+                            '<hr />' + element.innerHTML;
+                    }
+                }
+            });
+        }
+
+        function onError(error) {
+            alert('code: ' + error.code + '\n' +
+              'message: ' + error.message + '\n');
+        }
+
+    </script>
     <!--//Metis Menu -->
 </head>
 <body class="cbp-spmenu-push">
@@ -82,76 +118,7 @@
             <div class="main-page">
                 <div class="appearance">
                     <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Customer Name
-                                    </th>
-                                    <th>
-                                        Appointment Time
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-danger"><a href="#">TODAY</a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge"><a href="#">NORMAL</a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-primary"><a href="#">1</a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success"><a href="#">COMPLETED</a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-info"><a href="#">DEPOSITPENDING</a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-danger"><a href="#">TODAY</a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Name
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-warning"><a href="#">MISSED</a></span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <span id="spnApp"></span>
                     </div>
                     <div class="clearfix">
                     </div>
@@ -159,16 +126,16 @@
             </div>
         </div>
     </div>
-    <div id="divRes">
-    </div>
     <!--typo-ends-->
+    <p id="geolocation">
+        Watching geolocation...</p>
     <div class="copy-section">
         <p>
             &copy; 2016 FOSTER</p>
     </div>
     <!-- Classie -->
-    <script src="js/classie.js"></script>
-    <script>
+    <script language="javascript" type="text/javascript" src="js/classie.js"></script>
+    <script language="javascript" type="text/javascript">
         var menuLeft = document.getElementById('cbp-spmenu-s1'),
 						showLeftPush = document.getElementById('showLeftPush'),
 						body = document.body;
@@ -179,7 +146,6 @@
             classie.toggle(menuLeft, 'cbp-spmenu-open');
             disableOther('showLeftPush');
         };
-
 
         function disableOther(button) {
             if (button !== 'showLeftPush') {
@@ -214,20 +180,42 @@
 
         xmlhttp.onreadystatechange = function () {
             var response = xmlhttp.responseText;
-            //document.getElementById('divRes').innerText = response;
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var result = $(response).find("getFOSAssignmentsResult").text();
-                alert(result);
                 if (result == "NoData") {
-                    //                        document.getElementById('divModalContent').innerHTML = '<ul class="simple-list red-bullet"><li>No Policies Found</li></ul>';
-                    //                        window.location.href = '#modal'
                 }
                 else {
                     var objPF = JSON.parse(result);
-                    a = JSON.stringify(objPF);
-                    var PFData = objPF[0];
-                    alert(objPF[0]["owner_name"]);
-                    alert(objPF[1]["owner_name"]);
+                    var dRows = objPF.length;
+                    var sApp = '';
+
+                    sApp += '<table class="table table-bordered">';
+                    sApp += '<thead>';
+                    sApp += '<tr>';
+                    sApp += '<th>';
+                    sApp += 'Customer Name';
+                    sApp += '</th>';
+                    sApp += '<th>';
+                    sApp += 'Appointment Time';
+                    sApp += '</th>';
+                    sApp += '</tr>';
+                    sApp += '</thead>';
+
+                    sApp += '<tbody>';
+                    for (var i = 0; i < dRows; i++) {
+                        sApp += '<tr>';
+                        sApp += '<td>';
+                        sApp += objPF[i]["owner_name"];
+                        sApp += '</td>';
+                        sApp += '<td>';
+                        sApp += objPF[i]["appointment_date"] + ' ' + objPF[i]["appointment_time"]; //'<span class="badge badge-danger"><a href="#">TODAY</a></span>';
+                        sApp += '</td>';
+                        sApp += '</tr>';
+                    }
+                    sApp += '</tbody>';
+                    sApp += '</table>';
+
+                    document.getElementById('spnApp').innerHTML = sApp;
                 }
             }
         };
