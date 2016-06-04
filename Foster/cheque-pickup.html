@@ -81,7 +81,7 @@
 										<h5>Customer Name</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Customer Name">
+									<input id="customername" type="text">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -90,7 +90,7 @@
 										<h5>Address</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<textarea placeholder="Address"></textarea>
+									<textarea id="address"></textarea>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -99,7 +99,7 @@
 										<h5>Policy No.</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="PolicyNumber">
+									<input id="policyno" type="number">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -108,7 +108,7 @@
 										<h5>Phone/Mobile</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="tel" placeholder="Phone/Mobile">
+									<input id="mobile" type="tel">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -117,7 +117,7 @@
 										<h5>Telecaller Remarks</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Remarks">
+									<input id="agentcomments" type="text">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -135,7 +135,7 @@
 										<h5>Amount Due</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Amount Due">
+									<input id="premiumdue" type="number" placeholder="Amount Due">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -145,34 +145,16 @@
 										<h5>Pickup Category</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Pickup Category">
+									<input id="category" type="text" value="">
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>FOS</h5>
+										<h5>Company</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="FOS">
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="bottom-form">
-									<div class="col-md-3 grid-form">
-										<h5>Company Code</h5>
-									</div>
-									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Company Code">
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="bottom-form">
-									<div class="col-md-3 grid-form">
-										<h5>Event Status</h5>
-									</div>
-									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Event Status">
+									<input id="process" type="text" value="">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -181,7 +163,7 @@
 										<h5>Cheque Pickup Date</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="date" placeholder="Pickup Date">
+									<input id="pickupdt" type="date" placeholder="Pickup Date">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -190,7 +172,7 @@
 										<h5>Cheque Number</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Cheque Number">
+									<input id="chequeno" type="number" placeholder="Cheque Number">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -199,7 +181,7 @@
 										<h5>Cheque Amount</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Cheque Amount">
+									<input id="chequeamt" type="number" placeholder="Cheque Amount">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -208,13 +190,8 @@
 									<h5>Bank Name</h5>
 								</div>
 								<div class="col-md-9 grid-form1">
-								<select class="ser">
-									<option value="0">Please select</option>
-									<option value="1">Option #1</option>
-									<option value="2">Option #2</option>
-									<option value="3">Option #3</option>
-									<option value="4">Option #4</option>
-								</select>
+								<input id="bankname" type="text" placeholder = "Enter bank name"/>
+								
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -223,7 +200,7 @@
 										<h5>Receipt Number</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Receipt Number">
+									<input id="receiptno" type="number" placeholder="Receipt Number">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -232,7 +209,7 @@
 									<h5>Customer Interaction Status</h5>
 								</div>
 								<div class="col-md-9 grid-form1">
-								<select class="ser">
+								<select id="cis" class="ser">
 									<option value="0">Please select</option>
 									<option value="1">Completed</option>
 									<option value="2">Appointment Re-Scheduled</option>
@@ -242,39 +219,23 @@
 								<div class="clearfix"></div>
 							</div>
 							<div class="bottom-form">
-								<div class="col-md-3 grid-form">
-									<h5>FOS Visit Remarks</h5>
-								</div>
-								<div class="col-md-9 grid-form1">
-								<select class="ser">
-									<option value="0">Select</option>
-									<option value="1">Cheque Pickup</option>
-									<option value="2">Door Lock</option>
-									<option value="3">No Change in Details</option>
-									<option value="4">Short Address</option>
-									<option value="5">New Address Available-No Service Location</option>
-								</select>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="bottom-form">
 									<div class="col-md-3 grid-form">
 										<h5>Re-Schedule Date</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="date" placeholder="Date">
+									<input id="rescheduledt" type="date" placeholder="Date">
 									</div>
 									<div class="clearfix"></div>
 								</div>
-								<div class="bottom-form">
-									<div class="col-md-3 grid-form">
-										<h5>Detailed Comments</h5>
-									</div>
-									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Comments">
-									</div>
-									<div class="clearfix"></div>
+							<div class="bottom-form">
+								<div class="col-md-3 grid-form">
+									<h5>FOS Remarks</h5>
 								</div>
+								<div class="col-md-9 grid-form1">
+									<input id="foscomments" type="text" value="">
+								</div>
+								<div class="clearfix"></div>
+							</div>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
 										<h5>Geo Location</h5>
@@ -286,11 +247,14 @@
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-9 grid-form1">
-									<button type="submit" class="btn btn-sm btn-primary">Update Status</button>
+									<button id="btnsubmit" type="submit" class="btn btn-sm btn-primary">Update Status</button>
 								<button type="reset" class="btn btn-sm btn-warning">Close</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
+                                <div class="bottom-form">
+                                    <p id='pmsg'></p>
+                                </div>
 							</div>
 			</div>		
 		</div>	
@@ -300,27 +264,122 @@
 			<div class="copy-section">
 		<p>&copy; 2016 FOSTER</p>
 		</div>
-	</div>
+	
 			<!-- Classie -->
 				<script src="js/classie.js"></script>
 				<script>
-					var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-						showLeftPush = document.getElementById( 'showLeftPush' ),
-						body = document.body;
-						
-					showLeftPush.onclick = function() {
-						classie.toggle( this, 'active' );
-						classie.toggle( body, 'cbp-spmenu-push-toright' );
-						classie.toggle( menuLeft, 'cbp-spmenu-open' );
-						disableOther( 'showLeftPush' );
-					};
-					
+       $(document).ready(function(){             
+        var sPol = localStorage.getItem("ActivePolicy");
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+            }
+            xmlhttp.onerror = function () {
+                $('#laoderimg').hide();
+                alert("Check Your Network Connection");
+            }
 
-					function disableOther( button ) {
-						if( button !== 'showLeftPush' ) {
-							classie.toggle( showLeftPush, 'disabled' );
-						}
-					}
+            xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+            xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/getCustomerInfo");
+            xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
+            xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+
+            var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Header/>' +
+                                    '<soapenv:Body>' +
+                                    '<tem:getCustomerInfo>' +
+                                    '<tem:policyno>'+ sPol + '</tem:policyno>' +
+                                    '<tem:process>bsli</tem:process>' +
+                                    '</tem:getCustomerInfo>' +
+                                    '</soapenv:Body>' +
+                                    '</soapenv:Envelope>';
+            xmlhttp.send(xml);
+
+            xmlhttp.onreadystatechange = function () {
+                var response = xmlhttp.responseText;
+                //document.getElementById('divRes').innerText = response;
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var result = $(response).find("getCustomerInfoResult").text();
+                    //alert(result);
+                    if (result == "NoData") {
+                        //                        document.getElementById('divModalContent').innerHTML = '<ul class="simple-list red-bullet"><li>No Policies Found</li></ul>';
+                        //                        window.location.href = '#modal'
+                    }
+                    else {
+                        var objPF = JSON.parse(result);
+                        var dRows = objPF.length;
+                        $('#customername').val(objPF[0].owner_name);
+                        $('#address').val(objPF[0].cust_address);
+                        $('#policyno').val(objPF[0].policy_no);
+                        $('#mobile').val(objPF[0].mobile1);
+                        $('#agentcomments').val(objPF[0].agent_comments);
+                        $('#premiumdue').val(objPF[0].premium);
+                        $('#process').val(objPF[0].company);
+                }
+            };
+           }
+
+		$('#btnsubmit').click(function(){  
+           if($('#chequeno').val().length == 0){
+               alert("chque no. cannot be blank.");
+               return;
+           }
+           if($('#chequeamt').val().length == 0){
+               alert("chque amount cannot be blank.");
+               return;
+           }
+           
+           if($('#bankname').val().length == 0){
+               alert("bank name cannot be blank.");
+               return;
+           }
+           if($('#receiptno').val().length == 0){
+               alert("receipt no. cannot be blank");
+               return;
+           }
+
+           var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+            }
+            xmlhttp.onerror = function () {
+                $('#laoderimg').hide();
+                alert("Check Your Network Connection");
+            }
+
+            xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+            xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/updateFOSPickup");
+            xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
+            xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+
+            var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Header/>' +
+                                    '<soapenv:Body>' +
+                                    '<tem:updateFOSPickup>' +
+                                    '<tem:policyno>' + $('#policyno').val() + '</tem:policyno>' +
+                                    '<tem:process>' + $('#process').val() + '</tem:process>' +
+                                    '<tem:category>ffff</tem:category>' +
+                                    '<tem:chequeno>' + $('#chequeno').val() + '</tem:chequeno>' +
+                                    '<tem:chequeamt>' + $('#chequeamt').val() + '</tem:chequeamt>' +
+                                    '<tem:bankname>' + $('#bankname').val() +  '</tem:bankname>' +
+                                    '<tem:receiptno>' + $('#receiptno').val() + '</tem:receiptno>' +
+                                    '<tem:pickupdt>' + $('#pickupdt').val() + '</tem:pickupdt>' +
+                                    '<tem:fosremarks>' + $('#foscomments').val() + '</tem:fosremarks>' +
+                                    '</tem:updateFOSPickup>' +
+                                    '</soapenv:Body>' +
+                                    '</soapenv:Envelope>';
+            xmlhttp.send(xml);
+
+            xmlhttp.onreadystatechange = function () {
+                var response = xmlhttp.responseText;
+                //document.getElementById('divRes').innerText = response;
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var result = $(response).find("updateFOSPickupResult").text();
+                    //alert(result);
+                   $('#pmsg').text(JSON.parse(result));
+            }
+        };
+            });
+                    
+       });
 				</script>
 			<!-- Bootstrap Core JavaScript --> 
 				

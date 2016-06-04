@@ -78,28 +78,28 @@
 								<h4>Deposit Details</h4>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
+										<h5>Company</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input id="process" type="text" value="">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
+									<div class="col-md-3 grid-form">
 										<h5>Customer Name</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Customer Name">
+									<input id="customername" type="text">
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>Policy No.</h5>
+										<h5>Policy No</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="PolicyNumber">
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="bottom-form">
-									<div class="col-md-3 grid-form">
-										<h5>Cheque Pickup Date</h5>
-									</div>
-									<div class="col-md-9 grid-form1">
-									<input type="date" placeholder="Cheque Pickup Date">
+									<input id="policyno" type="text">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -108,7 +108,7 @@
 										<h5>Cheque Number</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Cheque Number" min="6" max="12">
+									<input id="chequeno" type="text" min="6" max="12">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -117,25 +117,16 @@
 										<h5>Cheque Amount</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Cheuqe Amount" min="3" max="12">
+									<input id="chequeamt" type="number" placeholder="Cheuqe Amount" min="3" max="12">
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>Cheque Bank Name</h5>
+										<h5>Bank Name</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Cheque Bank Name">
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="bottom-form">
-									<div class="col-md-3 grid-form">
-										<h5>Karvy Receipt</h5>
-									</div>
-									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Karvy Receipt" min="6" max="12">
+									<input id="bankname" type="text">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -144,7 +135,7 @@
 										<h5>Deposit Date</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="date" placeholder="Deposit Date">
+									<input id="depositdt" type="date" placeholder="Deposit Date">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -153,16 +144,16 @@
 										<h5>Acknowledgement Number</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Acknowledgement Number" min="6" max="12">
+									<input id="ackno" type="text" placeholder="Acknowledgement Number" min="3" max="20"/>
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>Deposit Bank Branch Name</h5>
+										<h5>Deposited Branch name</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Deposit Bank Branch Name">
+									<input id="depositbank" type="text" placeholder="Deposited Branch Name">
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -171,7 +162,7 @@
 										<h5>Deposit Branch Address</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<textarea placeholder="Address"></textarea>
+									<textarea id="branchaddr" placeholder="Address"></textarea>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -180,7 +171,7 @@
 									<h5>Deposition Status</h5>
 								</div>
 								<div class="col-md-9 grid-form1">
-								<select class="ser">
+								<select id="chequestatus" class="ser">
 									<option value="0">Please select</option>
 									<option value="1">Accepted</option>
 									<option value="2">Rejected</option>
@@ -190,69 +181,34 @@
 							</div>
 							<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>Reason</h5>
+										<h5>Reject Reason</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Reason">
+									<input id="rejectreason" type="text" placeholder="Reject Reason">
 									</div>
 									<div class="clearfix"></div>
 								</div>
-							<div class="bottom-form">
-									<div class="col-md-3 grid-form">
-										<h5>Receipt Number (Karvy)</h5>
-									</div>
-									<div class="col-md-9 grid-form1">
-									<input type="number" placeholder="Receipt Number(Karvy)" min="6" max="12">
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="bottom-form">
-								<div class="col-md-3 grid-form">
-									<h5>Customer Interaction Status</h5>
-								</div>
-								<div class="col-md-9 grid-form1">
-								<select class="ser">
-									<option value="0">Please select</option>
-									<option value="1">Completed</option>
-									<option value="2">Appointment Re-Scheduled</option>
-									<option value="3">Not Met</option>
-								</select>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="bottom-form">
-								<div class="col-md-3 grid-form">
-									<h5>FOS Visit Remarks</h5>
-								</div>
-								<div class="col-md-9 grid-form1">
-								<select class="ser">
-									<option value="0">Select</option>
-									<option value="1">Cheque Pickup</option>
-									<option value="2">Door Lock</option>
-									<option value="3">No Change in Details</option>
-									<option value="4">Short Address</option>
-									<option value="5">New Address Available-No Service Location</option>
-								</select>
-								</div>
-								<div class="clearfix"></div>
-							</div>
 								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>Detailed Comments</h5>
+										<h5>FOS Remarks</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Comments">
+									<input id="foscommets" type="text" placeholder="Comments">
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-9 grid-form1">
-									<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+									<button id="btnsubmit" type="submit" class="btn btn-sm btn-primary">Submit</button>
 								<button type="reset" class="btn btn-sm btn-warning">Close</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</div>
+                                <div class="bottom-form">
+                                    <p id='pmsg'></p>
+                                </div>
+                
 			</div>		
 		</div>	
 	</div>	
@@ -261,29 +217,124 @@
 			<div class="copy-section">
 		<p>&copy; 2016 FOSTER</p>
 		</div>
-	</div>
+	
 			<!-- Classie -->
 				<script src="js/classie.js"></script>
-				<script>
-					var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-						showLeftPush = document.getElementById( 'showLeftPush' ),
-						body = document.body;
-						
-					showLeftPush.onclick = function() {
-						classie.toggle( this, 'active' );
-						classie.toggle( body, 'cbp-spmenu-push-toright' );
-						classie.toggle( menuLeft, 'cbp-spmenu-open' );
-						disableOther( 'showLeftPush' );
-					};
-					
+				
+        <script>
+       $(document).ready(function(){             
+        var sPol = localStorage.getItem("ActivePolicy");
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+            }
+            xmlhttp.onerror = function () {
+                $('#laoderimg').hide();
+                alert("Check Your Network Connection");
+            }
 
-					function disableOther( button ) {
-						if( button !== 'showLeftPush' ) {
-							classie.toggle( showLeftPush, 'disabled' );
-						}
-					}
-				</script>
-			<!-- Bootstrap Core JavaScript --> 
+            xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+            xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/getCustomerInfo");
+            xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
+            xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+
+            var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Header/>' +
+                                    '<soapenv:Body>' +
+                                    '<tem:getCustomerInfo>' +
+                                    '<tem:policyno>'+ sPol + '</tem:policyno>' +
+                                    '<tem:process>bsli</tem:process>' +
+                                    '</tem:getCustomerInfo>' +
+                                    '</soapenv:Body>' +
+                                    '</soapenv:Envelope>';
+            xmlhttp.send(xml);
+
+            xmlhttp.onreadystatechange = function () {
+                var response = xmlhttp.responseText;
+                //document.getElementById('divRes').innerText = response;
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var result = $(response).find("getCustomerInfoResult").text();
+                    //alert(result);
+                        var objPF = JSON.parse(result);
+                        var dRows = objPF.length;
+                        $('#customername').val(objPF[0].owner_name);
+                        $('#policyno').val(objPF[0].policy_no);
+                        $('#process').val(objPF[0].company);
+                        $('#bankname').val(objPF[0].bank_name);
+                       $('#chequeno').val(objPF[0].cheque_no);
+                       $('#chequeamt').val(objPF[0].cheque_amt);
+            };
+           }
+
+		$('#btnsubmit').click(function(){  
+           
+           if($('#ackno').val().length == 0){
+               alert("acknowledgement no. cannot be blank");
+               return;
+           }
+           if($('#depositbank').val().length == 0){
+               alert("doposit branch cannot be empty.");
+               return;
+           }
+           if($('#depositdt').val().length == 0){
+               alert("doposit date cannot be empty.");
+               return;
+           }
+
+           if($("#chequestatus option:selected" ).text() == 'Rejected') {
+               if($('#rejectreason').val().length == 0){
+                   alert("reject reason cannot be empty.");
+                   return;
+               }
+           } else if($("#chequestatus option:selected" ).text() == 'Accepted') {
+           } else {
+               alert("Please specify Deposition status.");
+           }
+           var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+            }
+            xmlhttp.onerror = function () {
+                $('#laoderimg').hide();
+                alert("Check Your Network Connection");
+            }
+
+            xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+            xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/updateFOSDeposit");
+            xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
+            xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+
+            var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Header/>' +
+                                    '<soapenv:Body>' +
+                                    '<tem:updateFOSDeposit>' +
+                                    '<tem:policyno>' + $('#policyno').val() + '</tem:policyno>' +
+                                    '<tem:process>' + $('#process').val() + '</tem:process>' +
+                                    '<tem:depositdt>' + $('#depositdt').val() + '</tem:depositdt>' +
+                                    '<tem:depositbank>' + $('#depositbank').val() +  '</tem:depositbank>' +
+                                    '<tem:branchaddr>' + $('#branchaddr').val() +  '</tem:branchaddr>' +
+                                    '<tem:ackno>' + $('#ackno').val() + '</tem:ackno>' +
+                                    '<tem:chequestatus>' + $('#chequestatus').val() + '</tem:chequestatus>' +
+                                    '<tem:rejectreason>' + $('#rejectreason').val() + '</tem:rejectreason>' +
+                                    '<tem:fosremarks>' + $('#foscomments').val() + '</tem:fosremarks>' +
+                                    '</tem:updateFOSDeposit>' +
+                                    '</soapenv:Body>' +
+                                    '</soapenv:Envelope>';
+            xmlhttp.send(xml);
+
+            xmlhttp.onreadystatechange = function () {
+                var response = xmlhttp.responseText;
+                //document.getElementById('divRes').innerText = response;
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var result = $(response).find("updateFOSDepositResult").text();
+                    //alert(result);
+                   $('#pmsg').text(JSON.parse(result));
+            }
+        };
+            });
+                    
+       });
+            
+        </script>
+    <!-- Bootstrap Core JavaScript --> 
 				
 				<script type="text/javascript" src="js/bootstrap.min.js"></script>
 				<!--scrolling js-->
