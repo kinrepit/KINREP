@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>FOSTER</title>
@@ -45,11 +45,46 @@
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[1]) {
-                        var element = document.getElementById('geolocation');
+                        localStorage.setItem("FOSCurrentLoc", results[1].formatted_address);
+                        /*var element = document.getElementById('geolocation');
                         element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
-                            'Longitude: ' + position.coords.longitude + '<br />' +
-                            'Address : ' + results[1].formatted_address + '<br/>' +
-                            '<hr />' + element.innerHTML;
+                        'Longitude: ' + position.coords.longitude + '<br />' +
+                        'Address : ' + results[1].formatted_address + '<br/>' +
+                        '<hr />' + element.innerHTML;*/
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onload = function () {
+                        }
+                        xmlhttp.onerror = function () {
+                            $('#laoderimg').hide();
+                            alert("Check Your Network Connection");
+                        }
+
+                        xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+                        xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/logFOS");
+                        xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
+                        xmlhttp.setRequestHeader("Cache-Control", "no-cache");
+
+                        var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                                        '<soapenv:Header/>' +
+                                                        '<soapenv:Body>' +
+                                                        '<tem:logFOS>' +
+                                                        '<tem:foscode>' + localStorage.getItem("FOSCode") + '</tem:foscode>' +
+                                                        '<tem:lat>' + position.coords.latitude + '</tem:lat>' +
+                                                        '<tem:lng>' + position.coords.longitude + '</tem:lng>' +
+                                                        '<tem:formatted_address>' + results[1].formatted_address + '</tem:formatted_address>' +
+                                                        '</tem:logFOS>' +
+                                                        '</soapenv:Body>' +
+                                                        '</soapenv:Envelope>';
+                        //alert(xml);
+                        xmlhttp.send(xml);
+
+                        xmlhttp.onreadystatechange = function () {
+                            var response = xmlhttp.responseText;
+                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                var result = $(response).find("logFOSResult").text();
+                                //alert(result);
+                            }
+                        };
                     }
                 }
             });
@@ -118,7 +153,9 @@
             <div class="main-page">
                 <div class="appearance">
                     <div class="col-md-12">
-                        <span id="spnApp"></span>
+                        <div class="list-group list-group-alternate">
+                            <span id="spnApp"></span>
+                        </div>
                     </div>
                     <div class="clearfix">
                     </div>
@@ -127,8 +164,8 @@
         </div>
     </div>
     <!--typo-ends-->
-    <p id="geolocation">
-        Watching geolocation...</p>
+    <!--<p id="geolocation">
+        Watching geolocation...</p>-->
     <div class="copy-section">
         <p>
             &copy; 2016 FOSTER</p>
@@ -172,7 +209,7 @@
                                 '<soapenv:Header/>' +
                                 '<soapenv:Body>' +
                                 '<tem:getFOSAssignments>' +
-                                '<tem:foscode>222222</tem:foscode>' +
+                                '<tem:foscode>' + sFosCode + '</tem:foscode>' +
                                 '</tem:getFOSAssignments>' +
                                 '</soapenv:Body>' +
                                 '</soapenv:Envelope>';
@@ -189,28 +226,12 @@
                     var dRows = objPF.length;
                     var sApp = '';
 
-                    sApp += '<table class="table table-bordered">';
-                    sApp += '<thead>';
-                    sApp += '<tr>';
-                    sApp += '<th>';
-                    sApp += 'Customer Name';
-                    sApp += '</th>';
-                    sApp += '<th>';
-                    sApp += 'Appointment Time';
-                    sApp += '</th>';
-                    sApp += '</tr>';
-                    sApp += '</thead>';
-
-                    sApp += '<tbody>';
                     for (var i = 0; i < dRows; i++) {
-                        sApp += '<tr>';
-                        sApp += '<td>';
-                        sApp += objPF[i]["owner_name"];
-                        sApp += '</td>';
-                        sApp += '<td>';
-                        sApp += objPF[i]["appointment_date"] + ' ' + objPF[i]["appointment_time"]; //'<span class="badge badge-danger"><a href="#">TODAY</a></span>';
-                        sApp += '</td>';
-                        sApp += '</tr>';
+                        var sPolicyNo = objPF[i]["policy_no"];
+                        var sReceiptNo = objPF[i]["receipt_no"];
+
+                        sApp += '<a href="#" onclick=\'fn_Goto("' + sPolicyNo + '", "' + sReceiptNo + '")\' class="list-group-item"><span class="badge badge-info">' + objPF[i]["appointment_date"] + ' ';
+                        sApp += objPF[i]["appointment_time"] + '</span>' + objPF[i]["owner_name"] + '</a>';
                     }
                     sApp += '</tbody>';
                     sApp += '</table>';
@@ -219,6 +240,12 @@
                 }
             }
         };
+
+        function fn_Goto(PolicyNo, ReceiptNo) {
+            localStorage.setItem("ActivePolicy", PolicyNo);
+            var sHref = (ReceiptNo == 'null' ? 'cheque-pickup.html' : 'Deposit.html');
+            window.location.href = sHref;
+        }
 
         $(function () {
             Page.init();

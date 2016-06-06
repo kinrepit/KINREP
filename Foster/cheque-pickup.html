@@ -241,7 +241,7 @@
 										<h5>Geo Location</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input type="text" placeholder="Geo Location">
+									<input id="geoloc" type="text" >
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -270,6 +270,7 @@
 				<script>
        $(document).ready(function(){             
         var sPol = localStorage.getItem("ActivePolicy");
+            $('#geoloc').val(localStorage.getItem("FOSCurrentLoc"));        
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function () {
             }
