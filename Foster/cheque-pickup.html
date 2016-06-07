@@ -248,7 +248,7 @@
 								<div class="bottom-form">
 									<div class="col-md-9 grid-form1">
 									<button id="btnsubmit" type="submit" class="btn btn-sm btn-primary">Update Status</button>
-								<button type="reset" class="btn btn-sm btn-warning">Close</button>
+								    <button id="btnCancel" type="reset" class="btn btn-sm btn-warning">Cancel</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -319,7 +319,7 @@
             };
            }
 
-		$('#btnsubmit').click(function(){  
+           $('#btnsubmit').click(function(){  
            if($('#chequeno').val().length == 0){
                alert("chque no. cannot be blank.");
                return;
@@ -376,9 +376,14 @@
                     var result = $(response).find("updateFOSPickupResult").text();
                     //alert(result);
                    $('#pmsg').text(JSON.parse(result));
+                    window.location.href = 'main.html';
             }
         };
             });
+           
+           $('#btncancel').click(function() {
+                    window.location.href = 'main.html';
+           });
                     
        });
 				</script>
