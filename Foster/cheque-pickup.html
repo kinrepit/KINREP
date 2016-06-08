@@ -21,7 +21,7 @@
 <!--//webfonts--> 
 <!-- Metis Menu -->
 <script src="js/metisMenu.min.js"></script>
-<script src="js/custom.js"></script>
+    <script src="js/custom.js"></script>
 <link href="css/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
 </head> 
@@ -159,6 +159,41 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
+								<div class="col-md-3 grid-form">
+									<h5>Bank Name</h5>
+								</div>
+								<div class="col-md-9 grid-form1">
+								<input id="bankname" type="text" placeholder = "Enter bank name"/>
+								
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								<div class="bottom-form">
+								<div class="col-md-3 grid-form">
+									<h5>Customer Interaction Status</h5>
+								</div>
+								<div class="col-md-9 grid-form1">
+								<select id="cis" class="ser">
+									<option value="0">Please select</option>
+									<option value="1">Visited</option>
+									<option value="2">Appointment Re-Scheduled</option>
+									<option value="3">Door Locked</option>
+									<option value="4">Not Met</option>
+								</select>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+                            <div id="dvcompleted" style="display:none;">
+							<div class="bottom-form">
+									<div class="col-md-3 grid-form">
+										<h5>Receipt Number</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<input id="receiptno" type="number" placeholder="Receipt Number">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bottom-form">
 									<div class="col-md-3 grid-form">
 										<h5>Cheque Pickup Date</h5>
 									</div>
@@ -186,39 +221,31 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
-								<div class="col-md-3 grid-form">
-									<h5>Bank Name</h5>
-								</div>
-								<div class="col-md-9 grid-form1">
-								<input id="bankname" type="text" placeholder = "Enter bank name"/>
-								
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="bottom-form">
 									<div class="col-md-3 grid-form">
-										<h5>Receipt Number</h5>
+										<h5>Cheque Image Upload</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input id="receiptno" type="number" placeholder="Receipt Number">
+									<button class="button" id="uploadcheque">Upload</button>
+                                        <div id="uploadchequeres">
+                                            
+                                        </div>
 									</div>
 									<div class="clearfix"></div>
 								</div>
-								<div class="bottom-form">
-								<div class="col-md-3 grid-form">
-									<h5>Customer Interaction Status</h5>
-								</div>
-								<div class="col-md-9 grid-form1">
-								<select id="cis" class="ser">
-									<option value="0">Please select</option>
-									<option value="1">Completed</option>
-									<option value="2">Appointment Re-Scheduled</option>
-									<option value="3">Not Met</option>
-								</select>
-								</div>
-								<div class="clearfix"></div>
+                                </div>
+							<div id="dvdoorlocked" class="bottom-form" style="display:none;">
+									<div class="col-md-3 grid-form">
+										<h5>DoorLock Image Upload</h5>
+									</div>
+									<div class="col-md-9 grid-form1">
+									<button class="button" id="uploaddoorlock">Upload</button>
+                                        <div id="uploaddoorlockres">
+                                            
+                                        </div>
+									</div>
+									<div class="clearfix"></div>
 							</div>
-							<div class="bottom-form">
+							<div id="dvrescheduled" class="bottom-form" style="display:none;">
 									<div class="col-md-3 grid-form">
 										<h5>Re-Schedule Date</h5>
 									</div>
@@ -241,14 +268,14 @@
 										<h5>Geo Location</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input id="geoloc" type="text" >
+									<input id="geoloc" type="text" readonly />
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-9 grid-form1">
 									<button id="btnsubmit" type="submit" class="btn btn-sm btn-primary">Update Status</button>
-								    <button id="btnCancel" type="reset" class="btn btn-sm btn-warning">Cancel</button>
+								    <button id="btncancel" type="reset" class="btn btn-sm btn-warning">Cancel</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -258,6 +285,8 @@
 							</div>
 			</div>		
 		</div>	
+        <input id="hdnchequeimgpath" type="hidden" value=""/>
+        <input id="hdndoorlockimgpath" type="hidden" value=""/>
 	</div>	
 	<!--typo-ends-->
 	
@@ -320,22 +349,24 @@
            }
 
            $('#btnsubmit').click(function(){  
-           if($('#chequeno').val().length == 0){
-               alert("chque no. cannot be blank.");
-               return;
-           }
-           if($('#chequeamt').val().length == 0){
-               alert("chque amount cannot be blank.");
-               return;
-           }
-           
-           if($('#bankname').val().length == 0){
-               alert("bank name cannot be blank.");
-               return;
-           }
-           if($('#receiptno').val().length == 0){
-               alert("receipt no. cannot be blank");
-               return;
+           if($('#cis option:selected').val() == 1 ) {
+               if($('#chequeno').val().length == 0){
+                   alert("chque no. cannot be blank.");
+                   return;
+               }
+               if($('#chequeamt').val().length == 0){
+                   alert("chque amount cannot be blank.");
+                   return;
+               }
+               
+               if($('#bankname').val().length == 0){
+                   alert("bank name cannot be blank.");
+                   return;
+               }
+               if($('#receiptno').val().length == 0){
+                   alert("receipt no. cannot be blank");
+                   return;
+               }
            }
 
            var xmlhttp = new XMLHttpRequest();
@@ -363,6 +394,9 @@
                                     '<tem:bankname>' + $('#bankname').val() +  '</tem:bankname>' +
                                     '<tem:receiptno>' + $('#receiptno').val() + '</tem:receiptno>' +
                                     '<tem:pickupdt>' + $('#pickupdt').val() + '</tem:pickupdt>' +
+                                    '<tem:cis>' + $('#cis option:selected').text() + '</tem:cis>' +
+                                    '<tem:chequeimgpath>' + $('#hdnchequeimgpath').val() + '</tem:chequeimgpath>' +
+                                    '<tem:doorlockimgpath>' + $('#hdndoorlockimgpath').val() + '</tem:doorlockimgpath>' +
                                     '<tem:fosremarks>' + $('#foscomments').val() + '</tem:fosremarks>' +
                                     '</tem:updateFOSPickup>' +
                                     '</soapenv:Body>' +
@@ -384,12 +418,32 @@
            $('#btncancel').click(function() {
                     window.location.href = 'main.html';
            });
+           
+           $('#cis').on('change', function (e) {
+                //var optsel = $("option:selected", this);
+               $('#dvcompleted').hide();
+               $('#dvrescheduled').hide();
+               $('#dvdoorlocked').hide();
+                if(this.value == '1'){  //visited
+                 $('#dvcompleted').show();   
+                } 
+                else if(this.value == '2'){
+                 $('#dvrescheduled').show();
+                }
+                else if(this.value == '3') {
+                     $('#dvdoorlocked').show();
+                }   
+                
+            });
                     
        });
 				</script>
 			<!-- Bootstrap Core JavaScript --> 
 				
 				<script type="text/javascript" src="js/bootstrap.min.js"></script>
+                <script type="text/javascript" src="cordova.js"></script>
+                <script src="js/index.js"></script>
+
 				<!--scrolling js-->
 				<script src="js/jquery.nicescroll.js"></script>
 				<script src="js/scripts.js"></script>
