@@ -97,6 +97,7 @@ downloadApp.prototype = {
 	uploadFile: function () {
         rst = document.getElementById(this.id + 'res');
 	    rst.innerHTML = "";
+        var uploadTYPE = this.id;
 		navigator.camera.getPicture(
 			uploadPhoto,
 			function(message) {
@@ -117,20 +118,25 @@ downloadApp.prototype = {
 			}
 			
 			options.mimeType = "image/jpeg";
-			options.params = {}; // if we need to send parameters to the server request 
+            //options.httpMethod = "PUT";
+            //options.contentType = 'multipart/form-data';
+            var params = new Object();
+            params.uid = localStorage.getItem("FOSCode");
+            params.utyp = uploadTYPE;
+			options.params = params; 
             
 			options.headers = {
-				Connection: "Close"
+				Connection: "close"
 			};
             //options.httpMethod = 'POST';
-			options.chunkedMode = false;
+			options.chunkedMode = true;
 
 			var ft = new FileTransfer();
 
 			rst.innerHTML = "Upload in progress...";
 			ft.upload(
 				fileURI,
-				encodeURI("https://www.kinrep.com/foster/ws/filehandler.ashx"),
+				encodeURI("http://localhost/upload.php"),
 				onFileUploadSuccess,
 				onFileTransferFail,
 				options);
@@ -147,7 +153,7 @@ downloadApp.prototype = {
                 if(this.id == 'uploadcheque') {
                     document.getElementById("hdnchequeimgpath").value = destination;
                     
-                } else if(this.id == 'uploaddoorlocked') {
+                } else if(this.id == 'uploaddoorlock') {
                     
                     document.getElementById("hdndoorlockedimgpath").value = destination;
                 } else {

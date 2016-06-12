@@ -1,261 +1,102 @@
-<!DOCTYPE HTML>
-<html>
+<html ng-app="fosApp">
 <head>
-    <title>FOSTER</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
-    <!-- font-awesome icons -->
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <!-- //font-awesome icons -->
-    <!-- js-->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/modernizr.custom.js"></script>
-    <!--webfonts-->
-    <link href='//fonts.googleapis.com/css?family=Comfortaa:400,700,300' rel='stylesheet'
-        type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet'
-        type='text/css'>
-    <!--//webfonts-->
-    <!-- Metis Menu -->
-    <script language="javascript" type="text/javascript" src="js/metisMenu.min.js"></script>
-    <script language="javascript" type="text/javascript" src="js/custom.js"></script>
-    <link href="css/custom.css" rel="stylesheet">
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" charset="utf-8">
-        document.addEventListener("deviceready", onDeviceReady, false);
-        var watchID = null;
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AppBuilder + Ionic = <3</title>
 
-        function onDeviceReady() {
-            var options = { timeout: 300000 }; // Track Geo Location for every 5 Min.
-            watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-        }
-
-        function onSuccess(position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-
-            var latlng = new google.maps.LatLng(lat, lng);
-            var geocoder = geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[1]) {
-                        localStorage.setItem("FOSCurrentLoc", results[1].formatted_address);
-                        /*var element = document.getElementById('geolocation');
-                        element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
-                        'Longitude: ' + position.coords.longitude + '<br />' +
-                        'Address : ' + results[1].formatted_address + '<br/>' +
-                        '<hr />' + element.innerHTML;*/
-                        var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onload = function () {
-                        }
-                        xmlhttp.onerror = function () {
-                            $('#laoderimg').hide();
-                            alert("Check Your Network Connection");
-                        }
-
-                        xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
-                        xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/logFOS");
-                        xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
-                        xmlhttp.setRequestHeader("Cache-Control", "no-cache");
-
-                        var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
-                                                        '<soapenv:Header/>' +
-                                                        '<soapenv:Body>' +
-                                                        '<tem:logFOS>' +
-                                                        '<tem:foscode>' + localStorage.getItem("FOSCode") + '</tem:foscode>' +
-                                                        '<tem:lat>' + position.coords.latitude + '</tem:lat>' +
-                                                        '<tem:lng>' + position.coords.longitude + '</tem:lng>' +
-                                                        '<tem:formatted_address>' + results[1].formatted_address + '</tem:formatted_address>' +
-                                                        '</tem:logFOS>' +
-                                                        '</soapenv:Body>' +
-                                                        '</soapenv:Envelope>';
-                        //alert(xml);
-                        xmlhttp.send(xml);
-
-                        xmlhttp.onreadystatechange = function () {
-                            var response = xmlhttp.responseText;
-                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                                var result = $(response).find("logFOSResult").text();
-                                //alert(result);
+    <script src="cordova.js"></script>
+    <link href="http://code.ionicframework.com/1.0.0-beta.11/css/ionic.css" rel="stylesheet">
+    <script src="http://code.ionicframework.com/1.0.0-beta.11/js/ionic.bundle.js">
+    </script>
+    <script>
+         var fosApp = angular.module( 'fosApp', ["ionic"])
+            fosApp.factory('fosFactory', function($http) {
+            return {
+                getAssignments: function(callback) {
+                    $http
+                        .get('https://www.kinrep.com/foster/ws/virtualroomservice.asmx/getFOSAssignments', {
+                            params: {
+                                foscode: localStorage.getItem("FOSCode")
                             }
-                        };
-                    }
+                        })
+                    .success(callback);
                 }
-            });
-        }
-
-        function onError(error) {
-            alert('code: ' + error.code + '\n' +
-              'message: ' + error.message + '\n');
-        }
-
-    </script>
-    <!--//Metis Menu -->
-</head>
-<body class="cbp-spmenu-push">
-    <div class="main-content">
-        <!--left-fixed -navigation-->
-        <div class="sidebar" role="navigation">
-            <div class="navbar-collapse">
-                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right dev-page-sidebar mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar"
-                    id="cbp-spmenu-s1">
-					<div class="scrollbar scrollbar1">
-						<ul class="nav" id="side-menu">
-							<li>
-								<a href="main.html"><i class="fa fa-home nav_icon"></i>Home</a>
-							</li>
-							<li>
-								<a href="cheque-pickup.html"><i class="fa fa-magnet nav_icon"></i>Pickup Schedule</a></li>
-							<li>
-								<a href="PickupCompleted.html"><i class="fa fa-check-square nav_icon"></i>Pickup Completed</a></li>
-							<li>
-								<a href="Deposit.html"><i class="fa fa-bullhorn nav_icon"></i>Deposit Pending</a>
-							</li>
-							<li>
-								<a href="ReturnedCheques.html"><i class="fa fa-reply nav_icon"></i>Returned Cheques</a>
-							</li>
-							<li>
-								<a href="DueDispatch.html"><i class="fa fa-truck nav_icon"></i>Due for Dispatch</a>
-							</li>
-						</ul>
-					</div>
-					<!-- //sidebar-collapse -->
-				</nav>
-            </div>
-        </div>
-        <!--left-fixed -navigation-->
-        <!-- header-starts -->
-        <div class="sticky-header header-section ">
-            <div class="header-left">
-                <!--logo -->
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo.png" /></a>
-                </div>
-                <!--//logo-->
-                <div class="user-right">
-                    <button id="showLeftPush">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                </div>
-                <div class="clearfix">
-                </div>
-            </div>
-        </div>
-        <!-- //header-ends -->
-        <div id="page-wrapper">
-            <div class="main-page">
-                <div class="appearance">
-                    <div class="col-md-12">
-                        <div class="list-group list-group-alternate">
-                            <span id="spnApp"></span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--typo-ends-->
-    <!--<p id="geolocation">
-        Watching geolocation...</p>-->
-    <div class="copy-section">
-        <p>
-            &copy; 2016 FOSTER</p>
-    </div>
-    <!-- Classie -->
-    <script language="javascript" type="text/javascript" src="js/classie.js"></script>
-    <script language="javascript" type="text/javascript">
-        var menuLeft = document.getElementById('cbp-spmenu-s1'),
-						showLeftPush = document.getElementById('showLeftPush'),
-						body = document.body;
-
-        showLeftPush.onclick = function () {
-            classie.toggle(this, 'active');
-            classie.toggle(body, 'cbp-spmenu-push-toright');
-            classie.toggle(menuLeft, 'cbp-spmenu-open');
-            disableOther('showLeftPush');
-        };
-
-        function disableOther(button) {
-            if (button !== 'showLeftPush') {
-                classie.toggle(showLeftPush, 'disabled');
-            }
-        }
-
-        var sFosCode = localStorage.getItem("FOSCode");
-
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function () {
-        }
-        xmlhttp.onerror = function () {
-            $('#laoderimg').hide();
-            alert("Check Your Network Connection");
-        }
-
-        xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
-        xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/getFOSAssignments");
-        xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
-        xmlhttp.setRequestHeader("Cache-Control", "no-cache");
-
-        var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
-                                '<soapenv:Header/>' +
-                                '<soapenv:Body>' +
-                                '<tem:getFOSAssignments>' +
-                                '<tem:foscode>' + sFosCode + '</tem:foscode>' +
-                                '</tem:getFOSAssignments>' +
-                                '</soapenv:Body>' +
-                                '</soapenv:Envelope>';
-        xmlhttp.send(xml);
-
-        xmlhttp.onreadystatechange = function () {
-            var response = xmlhttp.responseText;
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var result = $(response).find("getFOSAssignmentsResult").text();
-                if (result == "NoData") {
-                }
-                else {
-                    var objPF = JSON.parse(result);
-                    var dRows = objPF.length;
-                    var sApp = '';
-
-                    for (var i = 0; i < dRows; i++) {
-                        var sPolicyNo = objPF[i]["policy_no"];
-                        var sReceiptNo = objPF[i]["receipt_no"];
-
-                        sApp += '<a href="#" onclick=\'fn_Goto("' + sPolicyNo + '", "' + sReceiptNo + '")\' class="list-group-item"><span class="badge badge-info">' + objPF[i]["appointment_date"] + ' ';
-                        sApp += objPF[i]["appointment_time"] + '</span>' + objPF[i]["owner_name"] + '</a>';
-                    }
-                    sApp += '</tbody>';
-                    sApp += '</table>';
-
-                    document.getElementById('spnApp').innerHTML = sApp;
-                }
-            }
-        };
-
-        function fn_Goto(PolicyNo, ReceiptNo) {
-            localStorage.setItem("ActivePolicy", PolicyNo);
-            var sHref = (ReceiptNo == 'null' ? 'cheque-pickup.html' : 'Deposit.html');
-            window.location.href = sHref;
-        }
-
-        $(function () {
-            Page.init();
+              };
         });
+         fosApp.controller( "fosController", function( $scope, fosFactory ) {
+               $scope.assignees = [];
+               $scope.groups = [];
+            fosFactory.getAssignments(function(results) {
+                var d = results.replace('<?xml version="1.0" encoding="utf-8"?>', '').replace('<string xmlns="http://tempuri.org/">', '').replace('</string>', '');
+                $scope.assignees = JSON.parse(d);
+                                $scope.groups[0] = {
+                  name: 'BSLI',
+                  assignees: $scope.assignees,
+                  show: false,
+                  totleads: Object.keys($scope.assignees).length
+                                    
+                };
+
+                });
+               $scope.assignee_details = function(p, r) {
+                   localStorage.setItem("ActivePolicy", p);
+                   if(r == null)
+                       window.location.href = 'cheque-pickup.html';
+                   else
+                       window.location.href = 'Deposit.html';
+               }
+              $scope.toggleGroup = function(group) {
+                group.show = !group.show;
+              };
+              $scope.isGroupShown = function(group) {
+                return group.show;
+              };
+        });
+        //                $http.get('https://www.kinrep.com/foster/ws/virtualroomservice.asmx/getFOSAssignments', {
+//    params: { foscode: localStorage.getItem("FOSCode") }}).then(function(data){
+
+                /*.success(function (data, status, headers, config) {
+                $scope.groceries = data;
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<br />status: " + status +
+                    "<br />headers: " + jsonFilter(header) +
+                    "<br />config: " + jsonFilter(config);
+            });*/
+            /*$scope.groceries = [
+                "Bananas", "Apples", "Oranges", "Milk", "Eggs", "Bread",
+                "Cereal", "Beef", "Napkins", "Cheese", "Peanut Butter"
+            ];*/
+        //});
     </script>
-    <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!--scrolling js-->
-    <script src="js/jquery.nicescroll.js"></script>
-    <script src="js/scripts.js"></script>
-    <!--//scrolling js-->
+</head>
+<body ng-controller="fosController">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Your Assignments</h1>
+    </ion-header-bar>
+    <ion-content scroll="false">
+        <div class="card-wrapper">
+            <div class="card custom-card">
+                <ion-scroll>
+        <ion-list>
+            <div ng-repeat="group in groups">
+                <ion-item class="item-stable"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            {{group.name + ' (Pending: ' + group.totleads + ')'}}
+          </ion-item>
+                <ion-item class="item-accordion" ng-repeat="assignee in group.assignees track by $index" item="assignee" ng-click="assignee_details(assignee.policy_no, assignee.receipt_no)" ng-show="isGroupShown(group)">
+                <h2>{{ assignee.owner_name }}</h2>
+                <p>{{ assignee.appointment_date + ' ' + assignee.appointment_time }}</p>
+            </ion-item>
+                </div>
+        </ion-list>
+                    </ion-scroll>
+                </div>
+            </div>
+    </ion-content>
 </body>
 </html>
