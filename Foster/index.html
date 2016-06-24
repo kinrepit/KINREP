@@ -63,7 +63,7 @@
                     </div>
                     <div class="bottom-form">
                         <div class="col-md-9 grid-form1">
-                            <input type="button" class="btn btn-lg btn-primary" value="Login" onclick='fn_Login();' />
+                            <input id="btnlogin" type="button" class="btn btn-lg btn-primary" value="Login" />
                         </div>
                         <div class="clearfix">
                         </div>
@@ -88,6 +88,22 @@
     <script src="js/scripts.js"></script>
     <!--//scrolling js-->
     <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            
+            $('#btnlogin').click(function() {
+                    $('#hError').text('Processing...');
+                    $.get('https://www.kinrep.com/foster/ws/virtualroomservice.asmx/getFOSDetails', { foscode: document.getElementById('txtFosCode').value })
+                    .success(function(result) {
+                        localStorage.setItem("FOSName", result[0]['contact_person']);
+                        localStorage.setItem("FOSCode", document.getElementById('txtFosCode').value);
+                        localStorage.setItem("errinfo", "");
+                        window.location.href = 'main.html';
+                    })
+                    .error(function() { alert('Check your internet connection'); });
+                
+            });
+            
+        });
         function fn_Login() {
             if (document.getElementById('txtFosCode').value == '') {
                 document.getElementById('hError').innerText = 'Please enter your FOS Code';

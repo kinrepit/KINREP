@@ -15,6 +15,7 @@
  <!-- js-->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <!--webfonts-->
 <link href='//fonts.googleapis.com/css?family=Comfortaa:400,700,300' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
@@ -26,6 +27,7 @@
 <!--//Metis Menu -->
 </head> 
 <body class="cbp-spmenu-push">
+  <form enctype="multipart/form-data">
 	<div class="main-content">
 		<!--left-fixed -navigation-->
 		<div class="sidebar" role="navigation">
@@ -160,6 +162,23 @@
 								</div>
 								<div class="bottom-form">
 								<div class="col-md-3 grid-form">
+									<h5>Customer Interaction Status</h5>
+								</div>
+								<div class="col-md-9 grid-form1">
+								<select id="cis" class="ser">
+									<option value="0">Please select</option>
+									<option value="1">Collected</option>
+									<option value="2">Appointment Re-Scheduled</option>
+									<option value="3">Door Locked</option>
+									<option value="4">Not Interested</option>
+									<option value="5">Not Met</option>
+								</select>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+                            <div id="dvcompleted" style="display:none;">
+								<div class="bottom-form">
+								<div class="col-md-3 grid-form">
 									<h5>Bank Name</h5>
 								</div>
 								<div class="col-md-9 grid-form1">
@@ -168,22 +187,6 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
-								<div class="bottom-form">
-								<div class="col-md-3 grid-form">
-									<h5>Customer Interaction Status</h5>
-								</div>
-								<div class="col-md-9 grid-form1">
-								<select id="cis" class="ser">
-									<option value="0">Please select</option>
-									<option value="1">Visited</option>
-									<option value="2">Appointment Re-Scheduled</option>
-									<option value="3">Door Locked</option>
-									<option value="4">Not Met</option>
-								</select>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-                            <div id="dvcompleted" style="display:none;">
 							<div class="bottom-form">
 									<div class="col-md-3 grid-form">
 										<h5>Receipt Number</h5>
@@ -274,30 +277,33 @@
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-9 grid-form1">
-									<button id="btnsubmit" type="submit" class="btn btn-sm btn-primary">Update Status</button>
+									<button id="btnsubmit" type="button" class="btn btn-sm btn-primary">Update Status</button>
 								    <button id="btncancel" type="reset" class="btn btn-sm btn-warning">Cancel</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
                                 <div class="bottom-form">
-                                    <p id='pmsg'></p>
+                            <h5 id="pmsg" style='color: Red;'>
+                            </h5>
                                 </div>
 							</div>
 			</div>		
 		</div>	
         <input id="hdnchequeimgpath" type="hidden" value=""/>
         <input id="hdndoorlockimgpath" type="hidden" value=""/>
+        <input id="hdnothersimgpath" type="hidden" value=""/>
 	</div>	
 	<!--typo-ends-->
 	
 			<div class="copy-section">
 		<p>&copy; 2016 FOSTER</p>
 		</div>
-	
+	</form>
 			<!-- Classie -->
 				<script src="js/classie.js"></script>
 				<script>
-       $(document).ready(function(){             
+       $(document).ready(function(){ 
+                    $("#pmsg").val(localStorage.getItem("errinfo"));
         var sPol = localStorage.getItem("ActivePolicy");
             $('#geoloc').val(localStorage.getItem("FOSCurrentLoc"));        
             var xmlhttp = new XMLHttpRequest();
@@ -318,7 +324,7 @@
                                     '<soapenv:Body>' +
                                     '<tem:getCustomerInfo>' +
                                     '<tem:policyno>'+ sPol + '</tem:policyno>' +
-                                    '<tem:process>bsli</tem:process>' +
+                                    '<tem:process>' + localStorage.getItem("ActiveProcess") + '</tem:process>' +
                                     '</tem:getCustomerInfo>' +
                                     '</soapenv:Body>' +
                                     '</soapenv:Envelope>';
@@ -344,6 +350,7 @@
                         $('#agentcomments').val(objPF[0].agent_comments);
                         $('#premiumdue').val(objPF[0].premium);
                         $('#process').val(objPF[0].company);
+                        $("#geoloc").val(localStorage.getItem("geoloc"));
                 }
             };
            }
@@ -351,20 +358,20 @@
            $('#btnsubmit').click(function(){  
            if($('#cis option:selected').val() == 1 ) {
                if($('#chequeno').val().length == 0){
-                   alert("chque no. cannot be blank.");
+                   $('#pmsg').text("chque no. cannot be blank.");
                    return;
                }
                if($('#chequeamt').val().length == 0){
-                   alert("chque amount cannot be blank.");
+                   $('#pmsg').text("chque amount cannot be blank.");
                    return;
                }
                
                if($('#bankname').val().length == 0){
-                   alert("bank name cannot be blank.");
+                   $('#pmsg').text("bank name cannot be blank.");
                    return;
                }
                if($('#receiptno').val().length == 0){
-                   alert("receipt no. cannot be blank");
+                   $('#pmsg').text("receipt no. cannot be blank");
                    return;
                }
            }
@@ -378,6 +385,7 @@
             }
 
             xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+            //xmlhttp.open("POST", "http://localhost:55013/VirtualRoomService.asmx", true);
             xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/updateFOSPickup");
             xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
             xmlhttp.setRequestHeader("Cache-Control", "no-cache");
@@ -386,6 +394,7 @@
                                     '<soapenv:Header/>' +
                                     '<soapenv:Body>' +
                                     '<tem:updateFOSPickup>' +
+                                    '<tem:foscode>' + localStorage.getItem("FOSCode") + '</tem:foscode>' +
                                     '<tem:policyno>' + $('#policyno').val() + '</tem:policyno>' +
                                     '<tem:process>' + $('#process').val() + '</tem:process>' +
                                     '<tem:category>ffff</tem:category>' +

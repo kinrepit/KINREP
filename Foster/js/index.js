@@ -95,9 +95,16 @@ downloadApp.prototype = {
 	},
 	
 	uploadFile: function () {
+   	    console.log("Upload File - step 1");
+       if (device.platform === 'Android') {
+          setInterval(function () {
+          cordova.exec(null, null, '', '', [])
+          }, 200);
+        }     
         rst = document.getElementById(this.id + 'res');
 	    rst.innerHTML = "";
         var uploadTYPE = this.id;
+   	    console.log("Upload File - calling getPicture");
 		navigator.camera.getPicture(
 			uploadPhoto,
 			function(message) {
@@ -105,13 +112,17 @@ downloadApp.prototype = {
 			}, {
 				quality         : 50,
 				destinationType : navigator.camera.DestinationType.FILE_URI,
-				sourceType      : navigator.camera.PictureSourceType.PHOTOLIBRARY
+				sourceType      : navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
+                encodingType: navigator.camera.EncodingType.JPEG,
+                mediaType: navigator.camera.MediaType.Picture
 			});
 		
 		function uploadPhoto(fileURI) {
+   	    console.log("Upload Photo - step 1");
 			var options = new FileUploadOptions();
 			options.fileKey = "file";
 			options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+   	    console.log("Upload Photo - step 2");
 			
 			if (cordova.platformId == "android") {
 				options.fileName += ".jpg" 
@@ -129,17 +140,18 @@ downloadApp.prototype = {
 				Connection: "close"
 			};
             //options.httpMethod = 'POST';
-			options.chunkedMode = true;
+			options.chunkedMode = false;
 
+   	    console.log("Upload Photo - step 3");
 			var ft = new FileTransfer();
 
 			rst.innerHTML = "Upload in progress...";
 			ft.upload(
 				fileURI,
-				encodeURI("http://localhost/upload.php"),
+				encodeURI("https://www.kinrep.com/foster/upload.php"),
 				onFileUploadSuccess,
 				onFileTransferFail,
-				options);
+				options, true);
 		
 			function onFileUploadSuccess (result) {
                // rst.innerHTML = "Upload successful";
@@ -147,9 +159,9 @@ downloadApp.prototype = {
 				console.log("Code = " + result.responseCode);
 				console.log("Response = " + result.response);
 				console.log("Sent = " + result.bytesSent);
-				console.log("Link to uploaded file: https://www.kinrep.com/foster/ws/contentlibrary" + result.response);
+				console.log("Link to uploaded file: https://www.kinrep.com/foster/ws/contentlibrary/" + result.response);
 				var response = result.response;
-				var destination = "https://www.kinrep.com/foster/WS/ContentLibrary" + response.substr(response.lastIndexOf('=') + 1);
+				var destination = "https://www.kinrep.com/foster/WS/ContentLibrary/" + response.substr(response.lastIndexOf('=') + 1);
                 if(this.id == 'uploadcheque') {
                     document.getElementById("hdnchequeimgpath").value = destination;
                     
@@ -167,12 +179,15 @@ downloadApp.prototype = {
 			}
         
 			function onFileTransferFail (error) {
+                
                 rst.innerHTML = "File Transfer failed: " + error.code;
+                alert(rst.innerHTML);
 				console.log("FileTransfer Error:");
 				console.log("Code: " + error.code);
 				console.log("Source: " + error.source);
 				console.log("Target: " + error.target);
 			}
+   	    console.log("Upload Photo - step 4 - end");
 		}
 	}
 }

@@ -179,7 +179,8 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
-							<div class="bottom-form">
+                           
+							<div id="dvrej" class="bottom-form" style="display:none;">
 									<div class="col-md-3 grid-form">
 										<h5>Reject Reason</h5>
 									</div>
@@ -193,20 +194,21 @@
 										<h5>FOS Remarks</h5>
 									</div>
 									<div class="col-md-9 grid-form1">
-									<input id="foscommets" type="text" placeholder="Comments">
+									<input id="foscomments" type="text" placeholder="Comments">
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="bottom-form">
 									<div class="col-md-9 grid-form1">
-									<button id="btnsubmit" type="submit" class="btn btn-sm btn-primary">Submit</button>
+									<button id="btnsubmit" type="button" class="btn btn-sm btn-primary">Submit</button>
 								<button id="btncancel" type="reset" class="btn btn-sm btn-warning">Cancel</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</div>
                                 <div class="bottom-form">
-                                    <p id='pmsg'></p>
+                            <h5 id="pmsg" style='color: Red;'>
+                            </h5>
                                 </div>
                 
 			</div>		
@@ -242,7 +244,7 @@
                                     '<soapenv:Body>' +
                                     '<tem:getCustomerInfo>' +
                                     '<tem:policyno>'+ sPol + '</tem:policyno>' +
-                                    '<tem:process>bsli</tem:process>' +
+                                    '<tem:process>' + localStorage.getItem("ActiveProcess") + '</tem:process>' +
                                     '</tem:getCustomerInfo>' +
                                     '</soapenv:Body>' +
                                     '</soapenv:Envelope>';
@@ -268,26 +270,26 @@
 		$('#btnsubmit').click(function(){  
            
            if($('#ackno').val().length == 0){
-               alert("acknowledgement no. cannot be blank");
+               $('#pmsg').text("acknowledgement no. cannot be blank");
                return;
            }
            if($('#depositbank').val().length == 0){
-               alert("doposit branch cannot be empty.");
+               $('#pmsg').text("doposit branch cannot be empty.");
                return;
            }
            if($('#depositdt').val().length == 0){
-               alert("doposit date cannot be empty.");
+               $('#pmsg').text("doposit date cannot be empty.");
                return;
            }
 
            if($("#chequestatus option:selected" ).text() == 'Rejected') {
                if($('#rejectreason').val().length == 0){
-                   alert("reject reason cannot be empty.");
+                   $('#pmsg').text("reject reason cannot be empty.");
                    return;
                }
            } else if($("#chequestatus option:selected" ).text() == 'Accepted') {
            } else {
-               alert("Please specify Deposition status.");
+               $('#pmsg').text("Please specify Deposition status.");
            }
            var xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function () {
@@ -298,6 +300,7 @@
             }
 
             xmlhttp.open("POST", "https://www.kinrep.com/foster/ws/VirtualRoomService.asmx", true);
+            //xmlhttp.open("POST", "http://localhost:55013/VirtualRoomService.asmx", true);
             xmlhttp.setRequestHeader("SOAPAction", "http://tempuri.org/updateFOSDeposit");
             xmlhttp.setRequestHeader("Content-Type", "text/xml;charset=UTF-8");
             xmlhttp.setRequestHeader("Cache-Control", "no-cache");
@@ -306,13 +309,14 @@
                                     '<soapenv:Header/>' +
                                     '<soapenv:Body>' +
                                     '<tem:updateFOSDeposit>' +
+                                    '<tem:foscode>' + localStorage.getItem("FOSCode") + '</tem:foscode>' +
                                     '<tem:policyno>' + $('#policyno').val() + '</tem:policyno>' +
                                     '<tem:process>' + $('#process').val() + '</tem:process>' +
                                     '<tem:depositdt>' + $('#depositdt').val() + '</tem:depositdt>' +
                                     '<tem:depositbank>' + $('#depositbank').val() +  '</tem:depositbank>' +
                                     '<tem:branchaddr>' + $('#branchaddr').val() +  '</tem:branchaddr>' +
                                     '<tem:ackno>' + $('#ackno').val() + '</tem:ackno>' +
-                                    '<tem:chequestatus>' + $('#chequestatus').val() + '</tem:chequestatus>' +
+                                    '<tem:chequestatus>' + $('#chequestatus option:selected').text() + '</tem:chequestatus>' +
                                     '<tem:rejectreason>' + $('#rejectreason').val() + '</tem:rejectreason>' +
                                     '<tem:fosremarks>' + $('#foscomments').val() + '</tem:fosremarks>' +
                                     '</tem:updateFOSDeposit>' +
@@ -335,7 +339,14 @@
                     window.location.href = 'main.html';
            });
            
-                    
+           $('#chequestatus').on('change', function (e) {
+               if(this.value == '1') {
+                   $('#dvrej').hide();
+               } else if(this.value == '2') {
+                   $('#dvrej').show();
+               }
+               
+           });        
        });
             
         </script>
